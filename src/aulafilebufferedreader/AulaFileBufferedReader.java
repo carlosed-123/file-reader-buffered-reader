@@ -20,30 +20,18 @@ public class AulaFileBufferedReader {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        String path = "C:\\Users\\CHRLS\\Desktop\\FileBufferedReader\\ina.txt";
-        FileReader fr = null;
-        BufferedReader br = null;
-
-        try {
-            fr = new FileReader(path);
-            br = new BufferedReader(fr);
-            String line = br.readLine();
-
-            while (line != null) {
+        String path = "C:\\Users\\CHRLS\\Desktop\\FileBufferedReader\\in.txt";
+        try (BufferedReader buffer = new BufferedReader(new FileReader(path))) {
+            
+            String line = buffer.readLine();
+            while(line != null){
                 System.out.println(line);
-                line = br.readLine();
+                line = buffer.readLine();
             }
-        } catch (IOException e) {
-            System.out.println("ERROR: " + e.getMessage());
+            
+            
+        } catch (FileNotFoundException e) {
+            System.out.println("ERROR! " + e.getMessage());
         }
-        finally{
-            if(br != null){
-                br.close();
-            }
-            if(fr !=null){
-                fr.close();
-            }
-        }
-
     }
 }
